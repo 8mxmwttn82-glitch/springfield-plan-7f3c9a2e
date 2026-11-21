@@ -54,9 +54,9 @@ body {
   font-size: 17px;
   line-height: 1.55;
   font-weight: 400;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
-html { overflow-x: hidden; }
+html { overflow-x: clip; }
 
 img, svg, table, .table-scroll, .chart, .chart-wrap { max-width: 100%; }
 img { height: auto; }
