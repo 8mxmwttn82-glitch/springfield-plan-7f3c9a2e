@@ -1,21 +1,21 @@
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
+  src: url("assets/fonts/SourceSansPro-Regular.ttf?v=30e35dda7a") format("truetype");
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("assets/fonts/SourceSansPro-Bold.ttf") format("truetype");
+  src: url("assets/fonts/SourceSansPro-Bold.ttf?v=471d4577c2") format("truetype");
   font-weight: 700; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("assets/fonts/SourceSansPro-It.ttf") format("truetype");
+  src: url("assets/fonts/SourceSansPro-It.ttf?v=e487c1ba98") format("truetype");
   font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("assets/fonts/SourceSansPro-BoldIt.ttf") format("truetype");
+  src: url("assets/fonts/SourceSansPro-BoldIt.ttf?v=2f7e5767d4") format("truetype");
   font-weight: 700; font-style: italic; font-display: swap;
 }
 
@@ -733,7 +733,7 @@ footer.site-footer {
 .paper-open .prose p { margin: 0 0 0.95rem; }
 .paper-open .prose p:last-child { margin-bottom: 0.4rem; }
 
-/* ---------- Recently done (flashy control + dialog) ---------- */
+/* ---------- Recent updates (flashy control + dialog) ---------- */
 .recently-done-wrap { margin: 0 0 14px; }
 .recently-done-btn {
   position: relative;
@@ -896,6 +896,18 @@ body.rd-lock { overflow: hidden; }
 .rd-task { margin: 0 0 6px; font-weight: 700; }
 .rd-meta { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.9rem; color: var(--muted); }
 .rd-date { font-weight: 700; color: var(--navy); }
+.rd-body { display: block; }
+.rd-pin-list { list-style: none; margin: 0 0 4px; padding: 0; }
+.rd-group { margin: 14px 0 0; }
+.rd-group-title {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.rd-sublist { list-style: none; margin: 0; padding: 0; }
 @media (min-width: 640px) {
   .rd-dialog { align-items: center; }
   .rd-dialog-panel { border-radius: 16px; }
