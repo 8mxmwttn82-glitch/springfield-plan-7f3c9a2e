@@ -515,11 +515,27 @@ figure.chart figcaption, .chart-cap { font-size: 0.85rem; color: var(--muted); m
 .vs-panel { display: none; }
 .vs-panel.on { display: block; }
 
-.status { font-weight: 700; }
-.st-done { color: #1C5A38; }
-.st-prog { color: var(--navy); }
-.st-block { color: #7A2E2E; }
-.st-ns { color: var(--muted); }
+.status {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.78em;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  padding: 0.16em 0.6em;
+  border-radius: 999px;
+  max-width: 22rem;
+  white-space: normal;
+  vertical-align: middle;
+}
+.st-done { color: #145238; background: #E3F2E9; }
+.st-prog { color: #1F3A5F; background: #E7EEF6; }
+.st-block { color: #7A2E2E; background: #F8E8E8; }
+.st-now { color: #184A38; background: #DCEEE4; }
+.st-soon { color: #3A4A16; background: #EEF0D8; }
+.st-aware { color: #7A4A12; background: #F5EBD8; }
+.st-standby { color: #4A3F6B; background: #EEEAF4; }
+.st-other { color: var(--muted); background: #EEECE7; }
+.os-line .status { font-size: 0.78rem; max-width: none; }
 
 /* ---------- Punch list page ---------- */
 .page-head { margin: 0 0 8px; }
