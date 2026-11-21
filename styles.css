@@ -103,12 +103,12 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 }
 .brand:hover { color: var(--navy-hover); text-decoration: none; }
 .brand-mark { display: block; flex: 0 0 auto; border-radius: 6px; }
-/* Hamburger retired: all tabs stay visible in a wrapping grid. */
+/* Three main tabs stay on a single row at every width, including 320px. */
 .nav-toggle { display: none; }
 .nav-links {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-wrap: nowrap;
+  align-items: stretch;
   gap: 4px;
   flex: 1 1 auto;
   justify-content: flex-end;
@@ -123,11 +123,14 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  padding: 6px 9px;
+  padding: 6px 10px;
   min-height: 34px;
   border-radius: 999px;
   cursor: pointer;
   white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
+  line-height: 1.2;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .nav-links button:hover { background: var(--navy-soft); color: var(--navy); }
@@ -136,8 +139,9 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 .nav-links button.nav-punch {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  margin-left: 4px;
+  margin-left: 2px;
   padding: 6px 12px;
   border: 1px solid rgba(31, 58, 95, 0.28);
   background: #fff;
@@ -157,9 +161,45 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 }
 .nav-ico { display: block; flex: 0 0 auto; }
 
-/* Tablet and phone: compact two-row grid so every tab is on screen at load. */
+/* Area sub-nav: sits under the main tabs, sticky with the header, wraps if needed. */
+.area-subnav-wrap {
+  display: block;
+  width: 100%;
+  border-top: 1px solid var(--line);
+  background: rgba(255, 252, 248, 0.78);
+}
+.area-subnav-wrap[hidden] { display: none !important; }
+.area-subnav {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 6px 16px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  overflow: visible;
+}
+.area-subnav button {
+  appearance: none;
+  border: 1px solid rgba(31, 58, 95, 0.22);
+  background: #fff;
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 5px 12px;
+  min-height: 32px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.area-subnav button:hover { background: var(--navy-soft); border-color: var(--navy); }
+.area-subnav button.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+.area-subnav button:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+
 @media (max-width: 1199px) {
-  :root { --nav-h: 108px; }
+  :root { --nav-h: 84px; }
   .nav-inner {
     flex-direction: column;
     align-items: stretch;
@@ -169,22 +209,21 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   }
   .brand { justify-content: flex-start; font-size: 0.75rem; }
   .nav-links {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: auto auto;
-    gap: 4px;
+    display: flex;
+    flex-wrap: nowrap;
     width: 100%;
     justify-content: stretch;
     flex: 0 0 auto;
   }
   .nav-links button {
-    width: 100%;
+    flex: 1 1 0;
+    width: auto;
     white-space: normal;
     text-align: center;
     justify-content: center;
     font-size: 0.6875rem;
     letter-spacing: 0;
-    line-height: 1.2;
+    line-height: 1.15;
     padding: 5px 4px;
     min-height: 36px;
     border-radius: 10px;
@@ -195,10 +234,11 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
     justify-content: center;
     gap: 4px;
   }
+  .area-subnav { padding: 6px 10px 8px; }
 }
 
 @media (max-width: 479px) {
-  :root { --nav-h: 118px; }
+  :root { --nav-h: 88px; }
   .nav-inner { padding: 6px 8px 7px; gap: 5px; }
   .brand { font-size: 0.6875rem; gap: 6px; }
   .brand-mark { width: 16px; height: 16px; }
@@ -206,7 +246,15 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   .nav-links button {
     font-size: 0.625rem;
     padding: 4px 2px;
-    min-height: 34px;
+    min-height: 40px;
+  }
+  .nav-ico { width: 12px; height: 12px; }
+  .area-subnav { padding: 6px 8px 8px; gap: 4px; }
+  .area-subnav button {
+    font-size: 0.6875rem;
+    padding: 5px 9px;
+    white-space: normal;
+    text-align: center;
   }
 }
 
@@ -674,7 +722,7 @@ footer.site-footer {
 @media print {
   .site-nav { position: static; }
   .nav-toggle { display: none; }
-  .nav-links { display: flex !important; flex-wrap: wrap; position: static; box-shadow: none; }
+  .nav-links { display: flex !important; flex-wrap: nowrap; position: static; box-shadow: none; }
   .panel { display: block !important; }
   footer.site-footer { background: transparent; color: var(--muted); }
   .footer-brand strong { color: var(--navy); }
