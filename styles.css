@@ -56,9 +56,11 @@ body {
   font-weight: 400;
   overflow-x: hidden;
 }
+html { overflow-x: hidden; }
+
 img, svg, table, .table-scroll, .chart, .chart-wrap { max-width: 100%; }
 img { height: auto; }
-a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 0.15s ease, text-decoration-thickness 0.15s ease; }
+a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 0.15s ease, text-decoration-thickness 0.15s ease; overflow-wrap: anywhere; word-break: break-word; }
 a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 .skip { position: absolute; left: -999px; top: 0; }
 .skip:focus { left: 16px; top: 16px; z-index: 80; background: var(--surface); padding: 8px 14px; border-radius: 8px; box-shadow: var(--shadow); }
@@ -68,7 +70,8 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   position: sticky;
   top: 0;
   z-index: 50;
-  height: var(--nav-h);
+  height: auto;
+  min-height: var(--nav-h);
   background: rgba(243, 238, 230, 0.90);
   backdrop-filter: saturate(1.4) blur(16px);
   -webkit-backdrop-filter: saturate(1.4) blur(16px);
@@ -78,12 +81,13 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 .nav-inner {
   max-width: 76rem;
   margin: 0 auto;
-  padding: 0 20px;
-  height: 100%;
+  padding: 6px 16px;
+  height: auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 6px 12px;
 }
 .brand {
   flex: 0 0 auto;
@@ -99,34 +103,16 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 }
 .brand:hover { color: var(--navy-hover); text-decoration: none; }
 .brand-mark { display: block; flex: 0 0 auto; border-radius: 6px; }
-.nav-toggle {
-  display: none;
-  appearance: none;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: var(--shadow-sm);
-}
-.nav-toggle span {
-  display: block;
-  width: 16px;
-  height: 1.5px;
-  background: var(--ink);
-  border-radius: 1px;
-}
+/* Hamburger retired: all tabs stay visible in a wrapping grid. */
+.nav-toggle { display: none; }
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1px;
-  flex-wrap: nowrap;
+  gap: 4px;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
 }
 .nav-links button {
   appearance: none;
@@ -171,25 +157,61 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
 }
 .nav-ico { display: block; flex: 0 0 auto; }
 
-@media (max-width: 920px) {
-  .nav-toggle { display: flex; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: var(--nav-h);
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    box-shadow: var(--shadow);
+/* Tablet and phone: compact two-row grid so every tab is on screen at load. */
+@media (max-width: 1199px) {
+  :root { --nav-h: 108px; }
+  .nav-inner {
     flex-direction: column;
     align-items: stretch;
-    padding: 10px 12px 16px;
+    justify-content: flex-start;
+    padding: 7px 10px 8px;
+    gap: 6px;
+  }
+  .brand { justify-content: flex-start; font-size: 0.75rem; }
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 4px;
+    width: 100%;
+    justify-content: stretch;
+    flex: 0 0 auto;
+  }
+  .nav-links button {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    font-size: 0.6875rem;
+    letter-spacing: 0;
+    line-height: 1.2;
+    padding: 5px 4px;
+    min-height: 36px;
+    border-radius: 10px;
+  }
+  .nav-links button.nav-punch {
+    margin-left: 0;
+    padding: 5px 4px;
+    justify-content: center;
     gap: 4px;
   }
-  .site-nav.open .nav-links { display: flex; }
-  .nav-links button { text-align: left; border-radius: 10px; min-height: 44px; font-size: 0.95rem; }
-  .nav-links button.nav-punch { margin-left: 0; justify-content: flex-start; }
+}
+
+@media (max-width: 479px) {
+  :root { --nav-h: 118px; }
+  .nav-inner { padding: 6px 8px 7px; gap: 5px; }
+  .brand { font-size: 0.6875rem; gap: 6px; }
+  .brand-mark { width: 16px; height: 16px; }
+  .nav-links { gap: 3px; }
+  .nav-links button {
+    font-size: 0.625rem;
+    padding: 4px 2px;
+    min-height: 34px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root { --nav-h: 56px; }
 }
 
 /* ---------- Document column ---------- */
