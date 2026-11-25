@@ -114,8 +114,7 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   justify-content: flex-end;
   min-width: 0;
 }
-.nav-links button,
-.nav-links a.nav-link {
+.nav-links button {
   appearance: none;
   border: 0;
   background: transparent;
@@ -134,7 +133,7 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   line-height: 1.2;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.nav-links button:hover, .nav-links a.nav-link:hover { background: var(--navy-soft); color: var(--navy); }
+.nav-links button:hover { background: var(--navy-soft); color: var(--navy); }
 .nav-links button.on { background: var(--navy); color: #fff; }
 .nav-links button:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
 .nav-links button.nav-punch {
@@ -216,8 +215,7 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
     justify-content: stretch;
     flex: 0 0 auto;
   }
-  .nav-links button,
-.nav-links a.nav-link {
+  .nav-links button {
     flex: 1 1 0;
     width: auto;
     white-space: normal;
@@ -245,8 +243,7 @@ a:hover { color: var(--navy-hover); text-decoration-thickness: 2px; }
   .brand { font-size: 0.6875rem; gap: 6px; }
   .brand-mark { width: 16px; height: 16px; }
   .nav-links { gap: 3px; }
-  .nav-links button,
-.nav-links a.nav-link {
+  .nav-links button {
     font-size: 0.625rem;
     padding: 4px 2px;
     min-height: 40px;
@@ -915,33 +912,3 @@ body.rd-lock { overflow: hidden; }
   .rd-dialog { align-items: center; }
   .rd-dialog-panel { border-radius: 16px; }
 }
-
-/* ===== Takeover (Duke Leader, Nov 25, 2026) ===== */
-.nav-links a.nav-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; box-sizing: border-box; }
-.takeover-banner {
-  margin: 14px 0 0; padding: 12px 14px; border-radius: var(--radius-sm);
-  background: var(--navy-soft); border: 1px solid rgba(31, 58, 95, 0.18); color: var(--ink); font-size: 0.95rem;
-}
-.takeover-banner a { color: var(--navy); font-weight: 700; }
-#panel-takeover .page-head .deck a { color: var(--navy); font-weight: 600; }
-.dash-filters { flex-wrap: wrap; }
-.dash-filters input[type="search"] {
-  font: inherit; font-size: 0.875rem; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--line-strong);
-  background: var(--surface); color: var(--ink); min-width: 10rem;
-}
-.dash-filters .dash-check { flex-direction: row; align-items: center; gap: 6px; }
-.dash-sort {
-  appearance: none; border: 0; background: transparent; font: inherit; font-weight: 700; color: inherit;
-  padding: 0; cursor: pointer; text-align: left;
-}
-.dash-sort::after { content: " ↕"; color: var(--faint); font-weight: 400; }
-th[aria-sort="ascending"] .dash-sort::after { content: " ↑"; color: var(--navy); }
-th[aria-sort="descending"] .dash-sort::after { content: " ↓"; color: var(--navy); }
-table.dash:not(.show-all) .col-ext { display: none; }
-table.dash td, table.dash th { vertical-align: top; }
-table.dash tr[hidden] { display: none !important; }
-#panel-takeover .sub-h { font-size: 1.02rem; margin: 22px 0 8px; color: var(--ink); }
-#panel-takeover .takeover-list { margin: 0; padding-left: 1.3rem; }
-#panel-takeover .takeover-list li { margin: 0 0 8px; line-height: 1.5; }
-#panel-takeover td a, #panel-takeover th a { color: var(--navy); word-break: break-word; }
-#panel-takeover .table-scroll { max-height: none; }
