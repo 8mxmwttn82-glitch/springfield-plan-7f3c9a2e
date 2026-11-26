@@ -35,10 +35,10 @@
   <header class="site-nav" id="site-nav">
     <div class="nav-inner">
       <a class="brand" href="#plan" data-go="plan"><svg class="brand-mark" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1F3A5F"/><path d="M7 12.2l3.1 3.1L17.2 8.2" fill="none" stroke="#F5F1EA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Duke's 2026-27 Life Plan</span></a>
-      <nav class="nav-links" id="nav-links" aria-label="Primary"><button type="button" class="on" data-tab="plan">Plan</button><button type="button" class="nav-punch" data-tab="punch"><svg class="nav-ico" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3.2 4.2h9.6M3.2 8h9.6M3.2 11.8h9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Punch List &amp; Updates</button><button type="button" class="" data-tab="areas">Areas of Marion’s Life</button><button type="button" data-tab="hb">Home &amp; Benefits (password protected)</button><button type="button" data-tab="lg">Legal (password protected)</button></nav>
+      <nav class="nav-links" id="nav-links" aria-label="Primary"><button type="button" class="on" data-tab="plan">Plan</button><button type="button" class="nav-punch" data-tab="punch"><svg class="nav-ico" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3.2 4.2h9.6M3.2 8h9.6M3.2 11.8h9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Punch List &amp; Updates</button><button type="button" class="" data-tab="areas">Areas of Marion’s Life</button></nav>
     </div>
     <div class="area-subnav-wrap" id="area-subnav-wrap" hidden>
-      <nav class="area-subnav" id="area-subnav" aria-label="Areas of Marion’s Life"><button type="button" class="on" data-area="schools">Schools</button><button type="button" class="" data-area="career">Career &amp; Earnings</button><button type="button" class="" data-area="sources">Sources</button></nav>
+      <nav class="area-subnav" id="area-subnav" aria-label="Areas of Marion’s Life"><button type="button" class="on" data-area="schools">Schools</button><button type="button" class="" data-area="career">Career &amp; Earnings</button><button type="button" class="" data-area="sources">Sources</button><button type="button" class="" data-area="hb">Home &amp; Benefits (password protected)</button><button type="button" class="" data-area="lg">Legal (password protected)</button></nav>
     </div>
   </header>
   <div class="wrap">
@@ -429,7 +429,7 @@
       const nav = document.getElementById("site-nav");
       const buttons = Array.from(document.querySelectorAll(".nav-links button"));
       const panels = Array.from(document.querySelectorAll("main > .panel"));
-      var AREA_IDS = ["schools", "career", "sources"];
+      var AREA_IDS = ["schools", "career", "sources", "hb", "lg"];
       var areaWrap = document.getElementById("area-subnav-wrap");
       var areaButtons = Array.from(document.querySelectorAll(".area-subnav button"));
       var currentArea = "schools";
@@ -457,7 +457,8 @@
           }
         }
         panels.forEach(function (p) {
-          var on = mainId === "areas" ? p.id === "panel-" + areaId : p.id === "panel-" + mainId;
+          var panelKey = areaId === "lg" ? "legal" : areaId;
+          var on = mainId === "areas" ? p.id === "panel-" + panelKey : p.id === "panel-" + mainId;
           p.classList.toggle("on", on);
         });
         var hashId = mainId === "areas" ? areaId : (jump || mainId);
@@ -492,6 +493,7 @@
       window.addEventListener("resize", syncNavHeight);
       var hash = (location.hash || "").replace(/^#/, "");
       if (hash === "punch-list" || hash === "updates") hash = "punch";
+      if (hash === "legal") hash = "lg";
       if (hash === "areas" || isArea(hash)) {
         show(hash === "areas" ? "schools" : hash);
       } else if (hash === "punch" || hash === "plan") {
@@ -500,6 +502,7 @@
         var target = document.getElementById(hash);
         var host = target.closest ? target.closest("main > .panel") : null;
         var pid = host && host.id ? host.id.replace(/^panel-/, "") : "";
+        if (pid === "legal") pid = "lg";
         if (isArea(pid)) show(pid, { jump: hash });
         else if (pid === "punch") show("punch", { jump: hash });
         else show("plan", { jump: hash });
@@ -592,7 +595,7 @@
     async function tryOpen(which, code) {
       var plain = await openVault(which, code);
       document.querySelectorAll('[data-gate="' + which + '"]').forEach(function (el) { el.outerHTML = plain; });
-      var btn = document.querySelector('[data-tab="' + which + '"]');
+      var btn = document.querySelector('[data-area="' + which + '"]');
       if (btn && which === "hb") btn.textContent = "Home & Benefits";
       if (btn && which === "lg") btn.textContent = "Legal";
     }
