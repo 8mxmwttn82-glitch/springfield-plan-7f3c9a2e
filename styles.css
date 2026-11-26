@@ -912,3 +912,13 @@ body.rd-lock { overflow: hidden; }
   .rd-dialog { align-items: center; }
   .rd-dialog-panel { border-radius: 16px; }
 }
+
+.duke-intro { margin: 0 0 16px; }
+.duke-intro p { margin: 0; font-size: 1.05rem; line-height: 1.5; }
+.gate-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 12px 0; }
+.gate-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; color: var(--muted); }
+.gate-form input { font: inherit; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 10px; min-width: 10rem; }
+.gate-form button, .gate-form input { background: var(--surface); }
+.gate-form button { font: inherit; font-weight: 700; color: #fff; background: var(--navy); border: 0; border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+.gate-error { color: var(--copper); font-weight: 700; }
+.gate-open h3 { margin: 1.1rem 0 0.4rem; color: var(--navy); }
